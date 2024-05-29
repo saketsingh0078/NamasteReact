@@ -1,0 +1,21 @@
+{
+  "name": "react-by-namaste-js",
+  "version": "1.0.0",
+  "description": "react",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saketsingh0078/NamasteReact.git"
+  },
+  "author": "Saket Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saketsingh0078/NamasteReact/issues"
+  },
+  "homepage": "https://github.com/saketsingh0078/NamasteReact#readme",
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  }
+}
