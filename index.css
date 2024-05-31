@@ -39,7 +39,7 @@
 }
 
 .res-card:hover {
-  background-color: aquamarine;
+  background-color: rgb(150, 150, 149);
   border: 2px solid black;
   cursor: pointer;
 }
@@ -57,4 +57,30 @@
 .card {
   display: flex;
   flex-wrap: wrap;
+}
+
+.search-container {
+  margin-top: 10px;
+  display: flex;
+}
+
+.search {
+  margin-right: 5px;
+  font-size: 15px;
+}
+
+.btn {
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.top-restaurant {
+  font-size: 15px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.login {
+  padding-right: 4px;
+  cursor: pointer;
 }

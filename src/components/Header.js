@@ -11,6 +11,7 @@ const Header = () => {
         <div className="home">Home</div>
         <div className="about">about</div>
         <div className="cart">cart</div>
+        <div className="login">Login</div>
       </div>
     </div>
   );
