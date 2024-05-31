@@ -6,4 +6,27 @@ Welcome to my project! Here's a quick video overview.
 
 ## Watch the Video
 
-<iframe width="560" height="315" src="eposide 4 project.mp4" frameborder="0" allowfullscreen></iframe>
+Eposide 4 project video
+
+# Namaste React Food LLD
+
+/\*
+
+-header
+-logo
+
+- nav
+
+-body
+-search
+
+- restaurant
+  -rest-card
+
+-footer
+
+- contact
+- copyright
+- address
+- Link
+  \*/
