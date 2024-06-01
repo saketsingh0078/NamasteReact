@@ -1,11 +1,13 @@
 import RestCard from "./Restcard";
 import { useState, useEffect } from "react";
 import { URL } from "../utils/constants";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [listofRestaurants, setlistofRestaurants] = useState([]);
   const [filterRest, setfilterRest] = useState([]);
   const [searchText, setsearchText] = useState(" ");
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     fetchData();
@@ -15,6 +17,7 @@ const Body = () => {
     const data = await fetch(URL);
     const json = await data.json();
 
+    //optional chain
     setlistofRestaurants(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
@@ -24,7 +27,9 @@ const Body = () => {
     );
   };
 
-  return (
+  return filterRest.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div>
       <div>
         <div className="search-container">
@@ -33,10 +38,10 @@ const Body = () => {
             type="text"
             value={searchText}
             onChange={(e) => {
-              console.log(searchText);
               setsearchText(e.target.value);
             }}
           />
+          {console.log(searchText)}
           <button
             className="btn"
             onClick={() => {
@@ -44,13 +49,15 @@ const Body = () => {
                 (restaurant) => {
                   return restaurant.info.name
                     .toLowerCase()
-                    .includes(searchText.toLocaleLowerCase());
+                    .includes(searchText.toLowerCase());
                 }
               );
               setfilterRest(searchRestaurant);
+              setCount((count) => count + 1);
               console.log(searchText);
             }}
           >
+            {count}
             Search
           </button>
           <button

@@ -84,3 +84,17 @@
   padding-right: 4px;
   cursor: pointer;
 }
+
+.shimmer-container {
+  margin-top: 35px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shimmercard {
+  padding: 2px;
+  margin: 20px;
+  width: 250px;
+  height: 350px;
+  background-color: rgb(208, 208, 208);
+}
