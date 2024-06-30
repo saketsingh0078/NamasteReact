@@ -2,12 +2,15 @@ import RestCard from "./Restcard";
 import { useState, useEffect } from "react";
 import { URL } from "../utils/constants";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [listofRestaurants, setlistofRestaurants] = useState([]);
   const [filterRest, setfilterRest] = useState([]);
   const [searchText, setsearchText] = useState(" ");
-  const [count, setCount] = useState(0);
+
+  const onlineStatus = useOnlineStatus();
 
   useEffect(() => {
     fetchData();
@@ -26,6 +29,15 @@ const Body = () => {
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
+
+  console.log(filterRest);
+
+  if (onlineStatus === false)
+    return (
+      <h1>
+        Looks like your are offline. Please Check your internet connection !!
+      </h1>
+    );
 
   return filterRest.length === 0 ? (
     <Shimmer />
@@ -53,11 +65,8 @@ const Body = () => {
                 }
               );
               setfilterRest(searchRestaurant);
-              setCount((count) => count + 1);
-              console.log(searchText);
             }}
           >
-            {count}
             Search
           </button>
           <button
@@ -76,7 +85,14 @@ const Body = () => {
 
       <div className="card">
         {filterRest.map((restaurant) => {
-          return <RestCard key={restaurant.id} restsData={restaurant} />;
+          return (
+            <Link
+              key={restaurant.info.id}
+              to={"/restaurants/" + restaurant.info.id}
+            >
+              <RestCard restsData={restaurant} />
+            </Link>
+          );
         })}
       </div>
     </div>
