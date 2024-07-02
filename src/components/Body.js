@@ -1,4 +1,4 @@
-import RestCard from "./Restcard";
+import RestCard, { withPromotedLabel } from "./Restcard";
 import { useState, useEffect } from "react";
 import { URL } from "../utils/constants";
 import Shimmer from "./Shimmer";
@@ -8,9 +8,11 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 const Body = () => {
   const [listofRestaurants, setlistofRestaurants] = useState([]);
   const [filterRest, setfilterRest] = useState([]);
-  const [searchText, setsearchText] = useState(" ");
+  const [searchText, setsearchText] = useState("");
 
   const onlineStatus = useOnlineStatus();
+
+  const RestaurantCardPromoted = withPromotedLabel(RestCard);
 
   useEffect(() => {
     fetchData();
@@ -44,18 +46,17 @@ const Body = () => {
   ) : (
     <div>
       <div>
-        <div className="search-container">
+        <div className="w-full pl-5 m-4">
           <input
-            className="search "
+            className="w-30 text-xl p-1 border-2 border-black"
             type="text"
             value={searchText}
             onChange={(e) => {
               setsearchText(e.target.value);
             }}
           />
-          {console.log(searchText)}
           <button
-            className="btn"
+            className="p-1  text-lg m-4 border-2"
             onClick={() => {
               const searchRestaurant = listofRestaurants.filter(
                 (restaurant) => {
@@ -70,7 +71,7 @@ const Body = () => {
             Search
           </button>
           <button
-            className="top-restaurant"
+            className="p-1 border-2 text-lg"
             onClick={() => {
               const topRestaurant = listofRestaurants.filter(
                 (restaurant) => restaurant.info.avgRating > 4
@@ -80,17 +81,26 @@ const Body = () => {
           >
             Top restaurant
           </button>
+
+          <input
+            className="w-30 text-xl p-1 border-2 border-black"
+            type="text"
+          />
         </div>
       </div>
 
-      <div className="card">
+      <div className="flex flex-wrap gap-10 justify-center">
         {filterRest.map((restaurant) => {
           return (
             <Link
               key={restaurant.info.id}
               to={"/restaurants/" + restaurant.info.id}
             >
-              <RestCard restsData={restaurant} />
+              {restaurant.info.isOpen ? (
+                <RestaurantCardPromoted restsData={restaurant} />
+              ) : (
+                <RestCard restsData={restaurant} />
+              )}
             </Link>
           );
         })}
