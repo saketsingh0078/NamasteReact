@@ -8,24 +8,20 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Card from "./components/Card";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
-const [username, setUserName] = useState("saket");
-
 const App = () => {
   return (
-    <UserContext.Provider
-      value={{
-        loggedInUser: username,
-        setUserName,
-      }}
-    >
+    <Provider store={appStore}>
       <div>
         <Header />
         <Outlet />
       </div>
-    </UserContext.Provider>
+    </Provider>
   );
 };
 const appRouter = createBrowserRouter([
@@ -50,6 +46,10 @@ const appRouter = createBrowserRouter([
             <Grocery />
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <Card />,
       },
     ],
     errorElement: <Error />,

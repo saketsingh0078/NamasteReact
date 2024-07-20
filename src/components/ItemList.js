@@ -1,7 +1,14 @@
+import { useDispatch } from "react-redux";
 import { FOOD_URL } from "../utils/constants";
+import { addItems } from "../utils/cartSlice";
 
 const ItemList = ({ items }) => {
-  console.log(items);
+  const dispatch = useDispatch();
+
+  const handleAdd = (elem) => {
+    dispatch(addItems(elem));
+  };
+
   return (
     <div className="p-2">
       {items.map((elem) => {
@@ -22,7 +29,10 @@ const ItemList = ({ items }) => {
                 alt=""
                 className="w-full h-full"
               />
-              <button className=" border-2  p-1 absolute top-[72%] left-12 text-center text-white tetx-lg font-bold bg-black">
+              <button
+                className=" border-2  p-1 absolute top-[72%] left-12 text-center text-white tetx-lg font-bold bg-black"
+                onClick={() => handleAdd(elem)}
+              >
                 Add +
               </button>
             </div>

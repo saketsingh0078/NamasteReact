@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import { LOGO_URL } from "../utils/constants";
 import useOnlineStatus from "../utils/useOnlineStatus";
-import { useContext } from "react";
-import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const onlineStatus = useOnlineStatus();
 
-  const { loggedInUser } = useContext(UserContext);
+  // subscribing the cart using the selectors
+  const cartItems = useSelector((store) => store.cart.items);
+
+  console.log(cartItems);
 
   return (
     <div className="w-full h-16 flex justify-between content-center">
@@ -16,26 +18,22 @@ const Header = () => {
       </div>
 
       <div className=" flex justify-between items-center gap-5 text-lg">
-        <div className="">onlineStatus : {onlineStatus ? "✅" : "🔴"}</div>
+        <div>onlineStatus : {onlineStatus ? "✅" : "🔴"}</div>
 
-        <div className="home">
+        <div>
           <Link to="/">Home</Link>
         </div>
-        <div className="about">
+        <div>
           <Link to="/about">About Us</Link>
         </div>
-        <div className="contact">
+        <div>
           <Link to="/contact">Contact</Link>
         </div>
-        <div className="cart">Cart</div>
-
-        <div className="grocery">
-          {" "}
-          <Link to="/grocery">Grocery</Link>
+        <div className="font-bold">
+          <Link to="/cart">Cart - ({cartItems.length} items)</Link>
         </div>
-
-        <div className="login">
-          Login <span className="font-semibold"> {loggedInUser}</span>
+        <div>
+          <Link to="/grocery">Grocery</Link>
         </div>
       </div>
     </div>

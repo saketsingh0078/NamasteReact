@@ -81,11 +81,6 @@ const Body = () => {
           >
             Top restaurant
           </button>
-
-          <input
-            className="w-30 text-xl p-1 border-2 border-black"
-            type="text"
-          />
         </div>
       </div>
 

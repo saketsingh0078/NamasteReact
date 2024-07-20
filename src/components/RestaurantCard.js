@@ -1,4 +1,5 @@
 const RestaurantCard = ({ restaurtant }) => {
+  console.log(restaurtant);
   const { name, cloudinaryImageId, avgRating, cuisines, areaName, locality } =
     restaurtant.info;
 
